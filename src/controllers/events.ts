@@ -150,7 +150,7 @@ const sendConversionEvent = async (req: Request, res: Response) => {
     .setFbc(fbc)
 
   const serverEvent = new ServerEvent()
-    .setEventName('Lead')
+    .setEventName('Contact')
     .setEventTime(current_timestamp)
     .setUserData(userData)
     .setEventSourceUrl(req.body.url)
@@ -162,7 +162,7 @@ const sendConversionEvent = async (req: Request, res: Response) => {
 
   try {
     const response = await eventRequest.execute();
-    res.status(200).json({ success: true, response, "teste": "Lead" });
+    res.status(200).json({ success: true, response, "teste": "Contact" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, error });

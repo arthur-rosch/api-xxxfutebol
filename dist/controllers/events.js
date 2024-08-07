@@ -135,7 +135,7 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
         .setFbp(fbp)
         .setFbc(fbc);
     const serverEvent = new ServerEvent()
-        .setEventName('Purchase')
+        .setEventName('Contact')
         .setEventTime(current_timestamp)
         .setUserData(userData)
         .setEventSourceUrl(req.body.url)
@@ -145,7 +145,7 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const eventRequest = new EventRequest(access_token, pixel_id).setEvents(eventsData);
     try {
         const response = yield eventRequest.execute();
-        res.status(200).json({ success: true, response });
+        res.status(200).json({ success: true, response, "teste": "Contact" });
     }
     catch (error) {
         console.log(error);
