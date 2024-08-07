@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.routes = void 0;
+const express_1 = require("express");
+const events_1 = require("./events");
+const routes = (0, express_1.Router)();
+exports.routes = routes;
+300;
+routes.post('/track/pageview', events_1.PageViewEvent);
+routes.post('/track/viewcontent', events_1.ViewContentEvent);
+routes.post('/track/click', events_1.ClickEvent);
+routes.post('/track/conversion', events_1.ConversionEvent);

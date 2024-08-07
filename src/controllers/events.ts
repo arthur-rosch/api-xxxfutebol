@@ -25,7 +25,6 @@ const sendPageViewEvent = async (req: Request, res: Response) => {
   const customData = (new CustomData())
     .setContents([content])
     .setCurrency("BRL")
-    .setValue("1");
 
 
   const userData = new UserData()
@@ -33,16 +32,6 @@ const sendPageViewEvent = async (req: Request, res: Response) => {
     .setClientUserAgent(userAgent)
     .setFbp(fbp)
     .setFbc(fbc)
-    .setEmails(['joe@gmail.com'])
-    .setPhones(['47984473369'])
-    .setFirstName('John')
-    .setLastName('Doe')
-    .setGender('male')
-    .setDateOfBirth('1990-01-01')
-    .setCity('São Paulo')
-    .setState('SP')
-    .setCountry('BR')
-    .setZip('01526-000');
 
 
   const serverEvent = new ServerEvent()
@@ -79,23 +68,13 @@ const sendViewContentEvent = async (req: Request, res: Response) => {
   const customData = (new CustomData())
     .setContents([content])
     .setCurrency("BRL")
-    .setValue("997");
 
   const userData = new UserData()
     .setClientIpAddress(userIp)
     .setClientUserAgent(userAgent)
     .setFbp(fbp)
     .setFbc(fbc)
-    .setEmails(['joe@gmail.com'])
-    .setPhones(['47984473369'])
-    .setFirstName('John')
-    .setLastName('Doe')
-    .setGender('male')
-    .setDateOfBirth('1990-01-01')
-    .setCity('São Paulo')
-    .setState('SP')
-    .setCountry('BR')
-    .setZip('01526-000');
+
 
   const serverEvent = new ServerEvent()
     .setEventName('ViewContent')
@@ -128,19 +107,10 @@ const sendClickEvent = async (req: Request, res: Response) => {
     .setClientUserAgent(userAgent)
     .setFbp(fbp)
     .setFbc(fbc)
-    .setEmails(['joe@gmail.com'])
-    .setPhones(['47984473369'])
-    .setFirstName('John')
-    .setLastName('Doe')
-    .setGender('male')
-    .setDateOfBirth('1990-01-01')
-    .setCity('São Paulo')
-    .setState('SP')
-    .setCountry('BR')
-    .setZip('01526-000');
+
 
   const serverEvent = new ServerEvent()
-    .setEventName('AddToCart')  // Use 'TrackClick' or another relevant event name if needed
+    .setEventName('Click')  // Use 'TrackClick' or another relevant event name if needed
     .setEventTime(current_timestamp)
     .setUserData(userData)
     .setEventSourceUrl(req.body.url || 'http://example.com')
@@ -171,23 +141,13 @@ const sendConversionEvent = async (req: Request, res: Response) => {
   const customData = (new CustomData())
     .setContents([content])
     .setCurrency("BRL")
-    .setValue("997");
+    .setValue("1")
 
   const userData = new UserData()
     .setClientIpAddress(userIp)
     .setClientUserAgent(userAgent)
     .setFbp(fbp)
     .setFbc(fbc)
-    .setEmails(['joe@gmail.com'])
-    .setPhones(['47984473369'])
-    .setFirstName('John')
-    .setLastName('Doe')
-    .setGender('male')
-    .setDateOfBirth('1990-01-01')
-    .setCity('São Paulo')
-    .setState('SP')
-    .setCountry('BR')
-    .setZip('01526-000');
 
   const serverEvent = new ServerEvent()
     .setEventName('Purchase')
