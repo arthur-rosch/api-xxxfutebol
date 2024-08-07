@@ -19,12 +19,33 @@ const CustomData = bizSdk.CustomData;
 const access_token = 'EAAbtAj6OkvABO2ZCCl2b4XKi7H8LJYV3YZBTtCfwHZAvrSuZAukZBlJspboPR7K0OX4aeCO1Nq1qQZAsJSsrdLQ7ILwUmiop9MNZBJaDIYoXgya3D5iwva1ii0o9ZAegF97ouzVUx3oZBxxffX8OFpKKBuRPK4aRrO2GKS0g4I5g05w3rbT8O8L2ekksGZAXWl6GdgjQZDZD';
 const pixel_id = '442646125238603';
 const api = bizSdk.FacebookAdsApi.init(access_token);
+// Função para formatar o fbc
+const formatClickID = (fbclid, domain) => {
+    const subdomainIndex = {
+        "com": 0,
+        "apostasprivilegiadas.com.br": 1,
+        "www.apostasprivilegiadas.com.br": 2
+    }[domain] || 1;
+    const creationTime = Math.floor(new Date().getTime() / 1000);
+    return `fb.${subdomainIndex}.${creationTime}.${fbclid}`;
+};
+// Função para extrair fbc da URL
+const extractFbcFromUrl = (url) => {
+    const urlParams = new URLSearchParams(new URL(url).search);
+    const fbclid = urlParams.get('fbclid');
+    if (fbclid) {
+        const domain = new URL(url).hostname;
+        return formatClickID(fbclid, domain);
+    }
+    return null;
+};
 const sendPageViewEvent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const current_timestamp = Math.floor(new Date().getTime() / 1000);
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbp = req.body.fbp;
-    const fbc = req.body.fbc;
+    const fbc = extractFbcFromUrl(req.body.url);
+    console.log(fbc);
     console.log(fbc, fbp, userIp, userAgent);
     const content = (new Content())
         .setId('apostasprivilegiadas')
@@ -35,7 +56,6 @@ const sendPageViewEvent = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbp(fbp)
         .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('PageView')
@@ -60,7 +80,7 @@ const sendViewContentEvent = (req, res) => __awaiter(void 0, void 0, void 0, fun
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbp = req.body.fbp;
-    const fbc = req.body.fbc;
+    const fbc = extractFbcFromUrl(req.body.url);
     const content = (new Content())
         .setId('apostasprivilegiadas')
         .setQuantity(1);
@@ -70,7 +90,6 @@ const sendViewContentEvent = (req, res) => __awaiter(void 0, void 0, void 0, fun
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbp(fbp)
         .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('ViewContent')
@@ -94,11 +113,10 @@ const sendClickEvent = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbp = req.body.fbp;
-    const fbc = req.body.fbc;
+    const fbc = extractFbcFromUrl(req.body.url);
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbp(fbp)
         .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('Click') // Use 'TrackClick' or another relevant event name if needed
@@ -120,8 +138,8 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const current_timestamp = Math.floor(new Date().getTime() / 1000);
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
-    const fbp = req.body.fbp;
-    const fbc = req.body.fbc;
+    const fbc = extractFbcFromUrl(req.body.url);
+    console.log(fbc);
     const content = (new Content())
         .setId('apostasprivilegiadas')
         .setQuantity(1);
@@ -132,7 +150,6 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbp(fbp)
         .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('Contact')
