@@ -152,7 +152,7 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
         .setClientUserAgent(userAgent)
         .setFbc(fbc);
     const serverEvent = new ServerEvent()
-        .setEventName('Contact')
+        .setEventName('Purchase')
         .setEventTime(current_timestamp)
         .setUserData(userData)
         .setEventSourceUrl(req.body.url)

@@ -168,7 +168,7 @@ const sendConversionEvent = async (req: Request, res: Response) => {
     .setFbc(fbc);
 
   const serverEvent = new ServerEvent()
-    .setEventName('Contact')
+    .setEventName('Purchase')
     .setEventTime(current_timestamp)
     .setUserData(userData)
     .setEventSourceUrl(req.body.url)
