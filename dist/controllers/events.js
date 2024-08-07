@@ -41,7 +41,7 @@ const sendPageViewEvent = (req, res) => __awaiter(void 0, void 0, void 0, functi
         .setEventName('PageView')
         .setEventTime(current_timestamp)
         .setUserData(userData)
-        .setEventSourceUrl(req.body.url || 'http://example.com')
+        .setEventSourceUrl(req.body.url)
         .setActionSource('website')
         .setCustomData(customData);
     const eventsData = [serverEvent];
@@ -76,7 +76,7 @@ const sendViewContentEvent = (req, res) => __awaiter(void 0, void 0, void 0, fun
         .setEventName('ViewContent')
         .setEventTime(current_timestamp)
         .setUserData(userData)
-        .setEventSourceUrl(req.body.url || 'http://example.com')
+        .setEventSourceUrl(req.body.url)
         .setActionSource('website')
         .setCustomData(customData);
     const eventsData = [serverEvent];
@@ -104,7 +104,7 @@ const sendClickEvent = (req, res) => __awaiter(void 0, void 0, void 0, function*
         .setEventName('Click') // Use 'TrackClick' or another relevant event name if needed
         .setEventTime(current_timestamp)
         .setUserData(userData)
-        .setEventSourceUrl(req.body.url || 'http://example.com')
+        .setEventSourceUrl(req.body.url)
         .setActionSource('website');
     const eventsData = [serverEvent];
     const eventRequest = new EventRequest(access_token, pixel_id).setEvents(eventsData);
@@ -138,7 +138,7 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
         .setEventName('Purchase')
         .setEventTime(current_timestamp)
         .setUserData(userData)
-        .setEventSourceUrl(req.body.url || 'http://example.com')
+        .setEventSourceUrl(req.body.url)
         .setActionSource('website')
         .setCustomData(customData);
     const eventsData = [serverEvent];
