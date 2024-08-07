@@ -38,7 +38,7 @@ const sendPageViewEvent = async (req: Request, res: Response) => {
     .setEventName('PageView')
     .setEventTime(current_timestamp)
     .setUserData(userData)
-    .setEventSourceUrl(req.body.url || 'http://example.com')
+    .setEventSourceUrl(req.body.url)
     .setActionSource('website')
     .setCustomData(customData);
 
@@ -80,7 +80,7 @@ const sendViewContentEvent = async (req: Request, res: Response) => {
     .setEventName('ViewContent')
     .setEventTime(current_timestamp)
     .setUserData(userData)
-    .setEventSourceUrl(req.body.url || 'http://example.com')
+    .setEventSourceUrl(req.body.url)
     .setActionSource('website')
     .setCustomData(customData);
 
@@ -113,7 +113,7 @@ const sendClickEvent = async (req: Request, res: Response) => {
     .setEventName('Click')  // Use 'TrackClick' or another relevant event name if needed
     .setEventTime(current_timestamp)
     .setUserData(userData)
-    .setEventSourceUrl(req.body.url || 'http://example.com')
+    .setEventSourceUrl(req.body.url)
     .setActionSource('website');
 
   const eventsData = [serverEvent];
@@ -153,7 +153,7 @@ const sendConversionEvent = async (req: Request, res: Response) => {
     .setEventName('Purchase')
     .setEventTime(current_timestamp)
     .setUserData(userData)
-    .setEventSourceUrl(req.body.url || 'http://example.com')
+    .setEventSourceUrl(req.body.url)
     .setActionSource('website')
     .setCustomData(customData);
 
