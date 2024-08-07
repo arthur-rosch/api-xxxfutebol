@@ -31,23 +31,12 @@ const sendPageViewEvent = (req, res) => __awaiter(void 0, void 0, void 0, functi
         .setQuantity(1);
     const customData = (new CustomData())
         .setContents([content])
-        .setCurrency("BRL")
-        .setValue("1");
+        .setCurrency("BRL");
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
         .setFbp(fbp)
-        .setFbc(fbc)
-        .setEmails(['joe@gmail.com'])
-        .setPhones(['47984473369'])
-        .setFirstName('John')
-        .setLastName('Doe')
-        .setGender('male')
-        .setDateOfBirth('1990-01-01')
-        .setCity('São Paulo')
-        .setState('SP')
-        .setCountry('BR')
-        .setZip('01526-000');
+        .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('PageView')
         .setEventTime(current_timestamp)
@@ -77,23 +66,12 @@ const sendViewContentEvent = (req, res) => __awaiter(void 0, void 0, void 0, fun
         .setQuantity(1);
     const customData = (new CustomData())
         .setContents([content])
-        .setCurrency("BRL")
-        .setValue("997");
+        .setCurrency("BRL");
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
         .setFbp(fbp)
-        .setFbc(fbc)
-        .setEmails(['joe@gmail.com'])
-        .setPhones(['47984473369'])
-        .setFirstName('John')
-        .setLastName('Doe')
-        .setGender('male')
-        .setDateOfBirth('1990-01-01')
-        .setCity('São Paulo')
-        .setState('SP')
-        .setCountry('BR')
-        .setZip('01526-000');
+        .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('ViewContent')
         .setEventTime(current_timestamp)
@@ -121,19 +99,9 @@ const sendClickEvent = (req, res) => __awaiter(void 0, void 0, void 0, function*
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
         .setFbp(fbp)
-        .setFbc(fbc)
-        .setEmails(['joe@gmail.com'])
-        .setPhones(['47984473369'])
-        .setFirstName('John')
-        .setLastName('Doe')
-        .setGender('male')
-        .setDateOfBirth('1990-01-01')
-        .setCity('São Paulo')
-        .setState('SP')
-        .setCountry('BR')
-        .setZip('01526-000');
+        .setFbc(fbc);
     const serverEvent = new ServerEvent()
-        .setEventName('AddToCart') // Use 'TrackClick' or another relevant event name if needed
+        .setEventName('Click') // Use 'TrackClick' or another relevant event name if needed
         .setEventTime(current_timestamp)
         .setUserData(userData)
         .setEventSourceUrl(req.body.url || 'http://example.com')
@@ -160,22 +128,12 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const customData = (new CustomData())
         .setContents([content])
         .setCurrency("BRL")
-        .setValue("997");
+        .setValue("1");
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
         .setFbp(fbp)
-        .setFbc(fbc)
-        .setEmails(['joe@gmail.com'])
-        .setPhones(['47984473369'])
-        .setFirstName('John')
-        .setLastName('Doe')
-        .setGender('male')
-        .setDateOfBirth('1990-01-01')
-        .setCity('São Paulo')
-        .setState('SP')
-        .setCountry('BR')
-        .setZip('01526-000');
+        .setFbc(fbc);
     const serverEvent = new ServerEvent()
         .setEventName('Purchase')
         .setEventTime(current_timestamp)
