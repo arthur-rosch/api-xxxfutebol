@@ -55,10 +55,12 @@ const sendPageViewEvent = async (req: Request, res: Response) => {
   const userData = new UserData()
     .setClientIpAddress(userIp)
     .setClientUserAgent(userAgent)
-    .setFbc(fbc);
+    .setFbc(fbc)
+        .setFbp(fbp);
 
   const serverEvent = new ServerEvent()
     .setEventName('PageView')
+    .setEventId("pageView-1")
     .setEventTime(current_timestamp)
     .setUserData(userData)
     .setEventSourceUrl(req.body.url)
@@ -95,7 +97,8 @@ const sendViewContentEvent = async (req: Request, res: Response) => {
   const userData = new UserData()
     .setClientIpAddress(userIp)
     .setClientUserAgent(userAgent)
-    .setFbc(fbc);
+    .setFbc(fbc)
+        .setFbp(fbp);
 
   const serverEvent = new ServerEvent()
     .setEventName('ViewContent')
@@ -126,7 +129,8 @@ const sendClickEvent = async (req: Request, res: Response) => {
   const userData = new UserData()
     .setClientIpAddress(userIp)
     .setClientUserAgent(userAgent)
-    .setFbc(fbc);
+    .setFbc(fbc)
+        .setFbp(fbp);
 
   const serverEvent = new ServerEvent()
     .setEventName('Click')  // Use 'TrackClick' or another relevant event name if needed
@@ -151,7 +155,8 @@ const sendConversionEvent = async (req: Request, res: Response) => {
   const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const userAgent = req.headers['user-agent'];
   const fbc = extractFbcFromUrl(req.body.url);
-  console.log(fbc)
+  const fbp = req.body.fbp
+
 
   const content = (new Content())
     .setId('apostasprivilegiadas')
@@ -165,10 +170,12 @@ const sendConversionEvent = async (req: Request, res: Response) => {
   const userData = new UserData()
     .setClientIpAddress(userIp)
     .setClientUserAgent(userAgent)
-    .setFbc(fbc);
+    .setFbc(fbc)
+        .setFbp(fbp);
 
   const serverEvent = new ServerEvent()
     .setEventName('Purchase')
+    .setEventId("purchase-1")
     .setEventTime(current_timestamp)
     .setUserData(userData)
     .setEventSourceUrl(req.body.url)
