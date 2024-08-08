@@ -56,9 +56,11 @@ const sendPageViewEvent = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbc(fbc);
+        .setFbc(fbc)
+        .setFbp(fbp);
     const serverEvent = new ServerEvent()
         .setEventName('PageView')
+        .setEventId("pageView-1")
         .setEventTime(current_timestamp)
         .setUserData(userData)
         .setEventSourceUrl(req.body.url)
@@ -90,7 +92,8 @@ const sendViewContentEvent = (req, res) => __awaiter(void 0, void 0, void 0, fun
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbc(fbc);
+        .setFbc(fbc)
+        .setFbp(fbp);
     const serverEvent = new ServerEvent()
         .setEventName('ViewContent')
         .setEventTime(current_timestamp)
@@ -117,7 +120,8 @@ const sendClickEvent = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbc(fbc);
+        .setFbc(fbc)
+        .setFbp(fbp);
     const serverEvent = new ServerEvent()
         .setEventName('Click') // Use 'TrackClick' or another relevant event name if needed
         .setEventTime(current_timestamp)
@@ -139,7 +143,7 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbc = extractFbcFromUrl(req.body.url);
-    console.log(fbc);
+    const fbp = req.body.fbp;
     const content = (new Content())
         .setId('apostasprivilegiadas')
         .setQuantity(1);
@@ -150,9 +154,11 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
-        .setFbc(fbc);
+        .setFbc(fbc)
+        .setFbp(fbp);
     const serverEvent = new ServerEvent()
         .setEventName('Purchase')
+        .setEventId("purchase-1")
         .setEventTime(current_timestamp)
         .setUserData(userData)
         .setEventSourceUrl(req.body.url)
