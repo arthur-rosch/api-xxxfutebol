@@ -44,7 +44,7 @@ const sendPageViewEvent = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbp = req.body.fbp;
-    const fbc = extractFbcFromUrl(req.body.url);
+    const fbc = req.body.fbc;
     console.log(fbc);
     console.log(fbc, fbp, userIp, userAgent);
     const content = (new Content())
@@ -82,7 +82,7 @@ const sendViewContentEvent = (req, res) => __awaiter(void 0, void 0, void 0, fun
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbp = req.body.fbp;
-    const fbc = extractFbcFromUrl(req.body.url);
+    const fbc = req.body.fbc;
     const content = (new Content())
         .setId('apostasprivilegiadas')
         .setQuantity(1);
@@ -116,7 +116,7 @@ const sendClickEvent = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
     const fbp = req.body.fbp;
-    const fbc = extractFbcFromUrl(req.body.url);
+    const fbc = req.body.fbc;
     const userData = new UserData()
         .setClientIpAddress(userIp)
         .setClientUserAgent(userAgent)
@@ -142,7 +142,7 @@ const sendConversionEvent = (req, res) => __awaiter(void 0, void 0, void 0, func
     const current_timestamp = Math.floor(new Date().getTime() / 1000);
     const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.headers['user-agent'];
-    const fbc = extractFbcFromUrl(req.body.url);
+    const fbc = req.body.fbc;
     const fbp = req.body.fbp;
     const content = (new Content())
         .setId('apostasprivilegiadas')

@@ -79,6 +79,49 @@ const sendPageViewEvent = async (req: Request, res: Response) => {
   }
 };
 
+const sendRegisterEvent = async (req: Request, res: Response) => {
+  const current_timestamp = Math.floor(new Date().getTime() / 1000);
+  const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const userAgent = req.headers['user-agent'];
+  const fbp = req.body.fbp;
+  const fbc = req.body.fbc
+  
+
+  const content = (new Content())
+    .setId('apostasprivilegiadas')
+    .setQuantity(1);
+
+  const customData = (new CustomData())
+    .setContents([content])
+    .setCurrency("BRL");
+
+  const userData = new UserData()
+    .setClientIpAddress(userIp)
+    .setClientUserAgent(userAgent)
+    .setFbc(fbc)
+        .setFbp(fbp);
+
+  const serverEvent = new ServerEvent()
+    .setEventName('Lead')
+    .setEventId("register-1")
+    .setEventTime(current_timestamp)
+    .setUserData(userData)
+    .setEventSourceUrl(req.body.url)
+    .setActionSource('website')
+    .setCustomData(customData);
+
+  const eventsData = [serverEvent];
+  const eventRequest = new EventRequest(access_token, pixel_id).setEvents(eventsData);
+
+  try {
+    const response = await eventRequest.execute();
+    res.status(200).json({ success: true, response });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, error });
+  }
+};
+
 const sendViewContentEvent = async (req: Request, res: Response) => {
   const current_timestamp = Math.floor(new Date().getTime() / 1000);
   const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -192,6 +235,10 @@ const sendConversionEvent = async (req: Request, res: Response) => {
     console.log(error);
     res.status(500).json({ success: false, error });
   }
+};
+
+export const RegisterEvent = async (req: Request, res: Response) => {
+  await sendRegisterEvent(req, res);
 };
 
 export const PageViewEvent = async (req: Request, res: Response) => {
